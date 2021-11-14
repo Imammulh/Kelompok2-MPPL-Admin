@@ -1,61 +1,114 @@
-import { Layout, Typography, Menu, Avatar } from "antd";
 import React from "react";
-import { Logo56 } from "../../Assets";
 import { Gap } from "../../Components/Atoms";
+import AdminNav from "../../Components/Organisms/AdminNav";
+import { Typography, Button, Table } from "antd";
+import { ArrowDownOutlined } from "@ant-design/icons";
+import { Line } from "@ant-design/charts";
+import { Nav } from "react-bootstrap";
 import "./Dashboard.css";
-import {
-  BarChartOutlined,
-  VideoCameraOutlined,
-  FileOutlined,
-  UserOutlined,
-  CaretDownOutlined,
-} from "@ant-design/icons";
 
 const Dashboard = () => {
-  const { Header, Sider, Content } = Layout;
+  // Table data
+  const columns = [
+    {
+      title: "Name Page",
+      dataIndex: "namePage",
+      key: "namePage",
+    },
+    {
+      title: "Page Views",
+      dataIndex: "pageViews",
+      key: "pageViews",
+    },
+  ];
+
+  const dataTable = [
+    {
+      key: "0",
+      namePage: "sangraikopi.com/produk/robusta",
+      pageViews: 520,
+    },
+    {
+      key: "1",
+      namePage: "sangraikopi.com/produk/arabica",
+      pageViews: 520,
+    },
+    {
+      key: "2",
+      namePage: "sangraikopi.com/produk/mecania",
+      pageViews: 520,
+    },
+  ];
+  // End table data
+
+  // Chart data
+  const data = [
+    { year: "1991", value: 3 },
+    { year: "1992", value: 4 },
+    { year: "1993", value: 3.5 },
+    { year: "1994", value: 5 },
+    { year: "1995", value: 4.9 },
+    { year: "1996", value: 6 },
+    { year: "1997", value: 7 },
+    { year: "1998", value: 9 },
+    { year: "1999", value: 13 },
+  ];
+
+  const config = {
+    data,
+    height: 400,
+    xField: "year",
+    yField: "value",
+    point: {
+      size: 5,
+      shape: "diamond",
+    },
+  };
+  // End chart data
+
   const { Title } = Typography;
+
   return (
-    <Layout>
-      <Sider theme="light" className="side-bar">
-        <div className="brand d-flex flex-row justify-content-center align-items-center">
-          <img src={Logo56} alt="logo-sangrai-kopi" className="brand-logo" />
-          <Gap width={8} />
-          <Title level={5}>Sangrai Kopi</Title>
-        </div>
-        <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
-          <Menu.Item key="1" icon={<BarChartOutlined />}>
-            Dashboard
-          </Menu.Item>
-          <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-            Product
-          </Menu.Item>
-          <Menu.Item key="3" icon={<FileOutlined />}>
-            Pages
-          </Menu.Item>
-        </Menu>
-      </Sider>
-      <Layout>
-        <Header>
-          <div className="header-content d-flex ">
-            <div className="col-6 my-auto">
-              <Title level={4} className="text-light">
-                Dashboard
-              </Title>
-            </div>
-            <div className="col-6">
-              <div className="user-admin d-flex justify-content-end align-items-center">
-                <Avatar size={32} icon={<UserOutlined />} />
-                <Gap width={8} />
-                <p className="text-light align-self-center">Admin 1</p>
-                <Gap width={8} />
-                <CaretDownOutlined size={12} className="text-light" />
-              </div>
-            </div>
+    <AdminNav title="Dashboard" selectedMenu="dashboard">
+      <Gap height={24} />
+      <div className="chart-section">
+        <div className="header-content d-flex flex-row justify-content-between align-items-lg-start">
+          <div className="header">
+            <Title level={4}>Visitors Website</Title>
+            <Gap height={4} />
+            <p>
+              {" "}
+              <ArrowDownOutlined /> 10.57% from last month{" "}
+            </p>
           </div>
-        </Header>
-        <Content>Content</Content>
-      </Layout>
-    </Layout>
+          <div className="tab">
+            <Nav variant="pills" defaultActiveKey="#">
+              <Nav.Item>
+                <Nav.Link href="#">Month</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
+                <Nav.Link eventKey="link-1">Week</Nav.Link>
+              </Nav.Item>
+            </Nav>
+          </div>
+        </div>
+        <Gap height={16} />
+        <div className="chart-section">
+          <Line {...config} />
+        </div>
+      </div>
+      <Gap height={36} />
+      <div className="page-visits-section">
+        <div className="header d-flex flex-row justify-content-between align-items-start">
+          <Title level={4}>Page Visits</Title>
+          <Button type="link">Lihat Semua</Button>
+        </div>
+        <Gap height={16} />
+        <div className="table">
+          <Table columns={columns} dataSource={dataTable} />
+        </div>
+      </div>
+    </AdminNav>
   );
 };
 

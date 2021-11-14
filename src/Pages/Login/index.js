@@ -17,8 +17,9 @@ const Login = () => {
             <Title level={3}>Masuk Admin Sangrai Kopi</Title>
           </div>
           <Gap height={16} />
-          <Form name="normal_login" className="login-form">
+          <Form layout="vertical" name="normal_login" className="login-form">
             <Form.Item
+              label="Username"
               name="username"
               rules={[
                 { required: true, message: "Please input your Username!" },
@@ -29,8 +30,9 @@ const Login = () => {
                 placeholder="Username"
               />
             </Form.Item>
-            <Gap height={8} />
+            <Gap height={4} />
             <Form.Item
+              label="Password"
               name="password"
               rules={[
                 { required: true, message: "Please input your Password!" },
