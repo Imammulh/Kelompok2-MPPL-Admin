@@ -74,6 +74,9 @@ const AdminNav = ({ title, selectedMenu, ...props }) => {
           <Menu.Item key="pages" icon={<FileOutlined />}>
             <Link to="/pages">Pages</Link>
           </Menu.Item>
+          <Menu.Item key="recipe" icon={<FileOutlined />}>
+            <Link to="/recipe">Recipe</Link>
+          </Menu.Item>
         </Menu>
       </Sider>
       <Layout>
