@@ -1,10 +1,11 @@
 import React from "react";
 import { Gap } from "../../Components/Atoms";
 import AdminNav from "../../Components/Organisms/AdminNav";
-import { Typography, Button, Table } from "antd";
+import { Typography, Button, Space, Table } from "antd";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { Line } from "@ant-design/charts";
 import { Nav } from "react-bootstrap";
+import { DownOutlined } from "@ant-design/icons";
 import "./Pages.css";
 
 const Pages = () => {
@@ -23,7 +24,13 @@ const Pages = () => {
     {
       title: "Aksi",
       dataIndex: "aksi",
-      key: "aksi",
+      key:"aksi",
+      render: (text, record) => (
+        <Space size="middle">
+          <a href="#">Edit</a>
+          <a href="#">Delete</a>
+        </Space>
+      ),
     },
 
   ];
@@ -33,25 +40,16 @@ const Pages = () => {
       key: "0",
       namePage: "Home",
       permalink: "sangraikopi.com/",
-      aksi:<Button type="warning" className="d-flex align-items-md-center">
-              ...
-           </Button>,
     },
     {
       key: "1",
       namePage: "About us",
       permalink: "sangraikopi.com/about-us",
-      aksi:<Button type="warning" className="d-flex align-items-md-center">
-              ...
-           </Button>,
     },
     {
       key: "2",
       namePage: "Katalog",
       permalink: "sangraikopi.com/katalog",
-      aksi:<Button type="warning" className="d-flex align-items-md-center">
-              ...
-           </Button>,
     },
   ];
   // End table data  
