@@ -1,12 +1,58 @@
-import React from "react";
 import AdminNav from "../../Components/Organisms/AdminNav";
 import Gap from "../../Components/Atoms/Gap";
-import { Form, Input, InputNumber, Select, Upload, message } from "antd";
-import { InboxOutlined } from "@ant-design/icons";
+import { useState, React } from "react";
+import {
+  Form,
+  Input,
+  InputNumber,
+  Select,
+  Upload,
+  message,
+  Button,
+  Space,
+} from "antd";
+import {
+  InboxOutlined,
+  PlusOutlined,
+  MinusCircleOutlined,
+} from "@ant-design/icons";
 import "./Roasted.css";
+import GuideWhite from "../../Components/Organisms/GuideWhite";
+import GuideBlack from "../../Components/Organisms/GuideBlack";
 
 export const RoastedForm = () => {
+  const { TextArea } = Input;
+
   const { Dragger } = Upload;
+
+  // Modal White Recipe
+  const [isModalVisibleWhite, setIsModalVisibleWhite] = useState(false);
+
+  const showModalWhite = () => {
+    setIsModalVisibleWhite(true);
+  };
+
+  const handleOkWhite = () => {
+    setIsModalVisibleWhite(false);
+  };
+
+  const handleCancelWhite = () => {
+    setIsModalVisibleWhite(false);
+  };
+
+  // Modal Black Recipe
+  const [isModalVisibleBlack, setIsModalVisibleBlack] = useState(false);
+  const showModalBlack = () => {
+    setIsModalVisibleBlack(true);
+  };
+
+  const handleOkBlack = () => {
+    setIsModalVisibleBlack(false);
+  };
+
+  const handleCancelBlack = () => {
+    setIsModalVisibleBlack(false);
+  };
 
   const props = {
     name: "file",
@@ -32,7 +78,7 @@ export const RoastedForm = () => {
     <AdminNav title="Tambah Produk Roasted" selectedMenu="product">
       <Gap height={24} />
       <div className="roasted">
-        <Form layout="vertical" wrapperCol={{ span: 14 }}>
+        <Form layout="vertical" wrapperCol={{ span: 16 }}>
           <Form.Item
             name="Nama Produk"
             label="Nama Produk"
@@ -67,11 +113,24 @@ export const RoastedForm = () => {
             </Select>
           </Form.Item>
           <Form.Item
+            name="stock barang"
+            label="Stock Barang"
+            rules={[{ required: true }]}
+          >
+            <InputNumber
+              className="width-100"
+              placeholder="Masukkan jumlah stock barang"
+            />
+          </Form.Item>
+          <Form.Item
             name="Berat Bersih (Gram)"
             label="Berat Bersih (Gram)"
             rules={[{ required: true }]}
           >
-            <InputNumber />
+            <InputNumber
+              className="width-100"
+              placeholder="Masukkan berat bersih barang dalam gram"
+            />
           </Form.Item>
 
           <Form.Item
@@ -79,7 +138,10 @@ export const RoastedForm = () => {
             label="Harga (Rupiah)"
             rules={[{ required: true }]}
           >
-            <InputNumber addonBefore="+" addonAfter="$" />
+            <InputNumber
+              className="width-100"
+              placeholder="Masukkan harga barang dalam rupiah"
+            />
           </Form.Item>
           <Form.Item
             name="Foto Produk"
@@ -96,7 +158,138 @@ export const RoastedForm = () => {
               </p>
             </Dragger>
           </Form.Item>
+
+          <Form.List name="users">
+            {(fields, { add, remove }) => (
+              <>
+                {fields.map(({ key, name, fieldKey, ...restField }) => (
+                  <Space
+                    key={key}
+                    style={{ display: "flex", marginBottom: 8 }}
+                    align="baseline"
+                  >
+                    <Form.Item
+                      label="Origin"
+                      {...restField}
+                      name="origin"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Origin wajib dimasukkan!",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Masukkan origin" />
+                    </Form.Item>
+                    <Form.Item
+                      label="Postharvest"
+                      {...restField}
+                      name="postharvest"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Postharvest wajib dimasukkan!",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Masukkan Postharvest" />
+                    </Form.Item>
+                    <Form.Item
+                      label="Percentage"
+                      {...restField}
+                      name="percentage"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Percentage wajib dimasukkan!",
+                        },
+                      ]}
+                    >
+                      <Input placeholder="Masukkan Percentage" />
+                    </Form.Item>
+
+                    <MinusCircleOutlined onClick={() => remove(name)} />
+                  </Space>
+                ))}
+                <Form.Item>
+                  <Button
+                    type="dashed"
+                    onClick={() => add()}
+                    block
+                    icon={<PlusOutlined />}
+                  >
+                    Tambah Campuran
+                  </Button>
+                </Form.Item>
+              </>
+            )}
+          </Form.List>
+          <Form.Item
+            name="deskripsi"
+            label="Deskripsi Produk"
+            rules={[
+              {
+                required: true,
+                message: "Deskripsi produk wajib dimasukkan!",
+              },
+            ]}
+          >
+            <TextArea />
+          </Form.Item>
+          <Form.Item
+            name="brewing guide white"
+            label="Brewing Guide White"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Pilih recipe">
+              <Select.Option value="brewing guide white batch 1">
+                brewing guide white batch 1
+              </Select.Option>
+              <Select.Option value="brewing guide white batch 2">
+                brewing guide white batch 2
+              </Select.Option>
+            </Select>
+            <Gap height={16} />
+            <Button onClick={showModalWhite}>
+              <PlusOutlined />
+              Tambah Guide
+            </Button>
+          </Form.Item>
+
+          <Gap height={8} />
+          <Form.Item
+            name="brewing guide black"
+            label="Brewing Guide Black"
+            rules={[{ required: true }]}
+          >
+            <Select placeholder="Pilih recipe">
+              <Select.Option value="brewing guide black batch 1">
+                brewing guide black batch 1
+              </Select.Option>
+              <Select.Option value="brewing guide black batch 2">
+                brewing guide black batch 2
+              </Select.Option>
+            </Select>
+            <Gap height={16} />
+            <Button onClick={showModalBlack}>
+              <PlusOutlined />
+              Tambah Guide
+            </Button>
+          </Form.Item>
+          <Button type="primary" htmlType="submit">
+            Submit
+          </Button>
         </Form>
+        <GuideWhite
+          visible={isModalVisibleWhite}
+          onOk={handleOkWhite}
+          onCancel={handleCancelWhite}
+        />
+        <GuideBlack
+          visible={isModalVisibleBlack}
+          onOk={handleOkBlack}
+          onCancel={handleCancelBlack}
+        />
       </div>
     </AdminNav>
   );
