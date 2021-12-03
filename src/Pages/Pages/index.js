@@ -5,11 +5,10 @@ import { Typography, Button, Space, Table } from "antd";
 import { ArrowDownOutlined } from "@ant-design/icons";
 import { Line } from "@ant-design/charts";
 import { Nav } from "react-bootstrap";
-import { DownOutlined } from "@ant-design/icons";
 import "./Pages.css";
 
 const Pages = () => {
-// Table data
+  // Table data
   const columns = [
     {
       title: "Name Page",
@@ -32,7 +31,6 @@ const Pages = () => {
         </Space>
       ),
     },
-
   ];
 
   const dataTable = [
@@ -59,11 +57,10 @@ const Pages = () => {
       <div className="page-visits-section">
         <Gap height={16} />
         <div className="table">
-          <Table columns={columns} dataSource={dataTable} />
+            <Table columns={columns} dataSource={dataTable} />
         </div>
       </div>
     </AdminNav>
-
   );
 };
 

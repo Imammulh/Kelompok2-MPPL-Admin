@@ -57,11 +57,19 @@ const AdminNav = ({ title, selectedMenu, ...props }) => {
 
   return (
     <Layout>
-      <Sider theme="light" className="side-bar">
+      <Sider 
+        style={{
+         overflow: 'auto',
+            height: '100vh',
+            position: 'fixed',
+            left: 0,
+        }}
+      theme="light" className="side-bar"
+      >
         <div className="brand d-flex flex-row justify-content-center align-items-center">
           <img src={Logo56} alt="logo-sangrai-kopi" className="brand-logo" />
           <Gap width={8} />
-          <Title level={5}>Sangrai Kopi</Title>
+          <Title  level={5}>Sangrai Kopi</Title>
         </div>
         <Menu theme="light" mode="inline" defaultSelectedKeys={[selectedMenu]}>
           <Menu.Item key="dashboard" icon={<BarChartOutlined />}>
@@ -79,8 +87,8 @@ const AdminNav = ({ title, selectedMenu, ...props }) => {
           </Menu.Item>
         </Menu>
       </Sider>
-      <Layout>
-        <Header>
+      <Layout style={{ marginLeft: 200 }}>
+        <Header style={{ position: 'fixed', zIndex: 1, width: '85%' }}>
           <div className="header-content d-flex ">
             <div className="col-6 my-auto">
               <Title level={4} className="text-light">
@@ -115,7 +123,7 @@ const AdminNav = ({ title, selectedMenu, ...props }) => {
           </div>
         </Header>
         <Content>
-          <Container>{props.children}</Container>
+          <Container style={{ marginTop:50}}>{props.children}</Container>
         </Content>
       </Layout>
     </Layout>
