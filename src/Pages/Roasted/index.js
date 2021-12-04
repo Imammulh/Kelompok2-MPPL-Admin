@@ -21,10 +21,6 @@ import GuideWhite from "../../Components/Organisms/GuideWhite";
 import GuideBlack from "../../Components/Organisms/GuideBlack";
 
 export const RoastedForm = () => {
-  const { TextArea } = Input;
-
-  const { Dragger } = Upload;
-
   // Modal White Recipe
   const [isModalVisibleWhite, setIsModalVisibleWhite] = useState(false);
 
@@ -53,6 +49,10 @@ export const RoastedForm = () => {
   const handleCancelBlack = () => {
     setIsModalVisibleBlack(false);
   };
+
+  const { TextArea } = Input;
+
+  const { Dragger } = Upload;
 
   const props = {
     name: "file",
